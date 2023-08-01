@@ -101,7 +101,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
 
     case OPCODE_SHL: // 0x8XYE
       {
-        uint8_t carry = ( soc->v[ins->X] ) >> 7;
+        uint8_t carry = ( soc->v[ins->Y] ) >> 7;
 	soc->v[ins->X] = soc->v[ins->Y];
         soc->v[ins->X] = soc->v[ins->X] << 1;
 	soc->v[0xF] = carry;
@@ -156,16 +156,13 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
         case state_idle:
           soc->kb_state = state_waiting_keypress;
 	  soc->pc -=2;
-//	  printf("-------------------------------> waiting key press\n");
         break;
 
         case state_waiting_keypress:
-	 // printf("waiting key press\n");
 	  for (uint8_t i = 0; i<16; ++i) {
             if ( soc->key[i] ) {
               soc->last_key = i;
               soc->kb_state = state_waiting_keyrelease;
-//	      printf("-------------------------------> waiting key release\n");
             }    
           }
 	  soc->pc -=2;
@@ -174,7 +171,6 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
 	case state_waiting_keyrelease:
 	  {
             int done = 1;		  
-//            printf(" waiting key release\n");
             for (uint8_t i = 0; i<16; ++i) {
               if ( soc->key[i] ) {
                 done = 0;
@@ -183,8 +179,6 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
 	    if (done) {
               soc->kb_state = state_idle;
 	      soc->v[ins->X] = soc->last_key;
-//	      printf(" ====== last key %d\n", soc->last_key);
-//	      printf(" -------------------------------> idle\n");
 	    } else {
               soc->pc -=2;
             }		    
@@ -199,12 +193,10 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
 
     case OPCODE_SETT:
       soc->delay_timer = soc->v[ins->X];
-//      printf("SETT hit: %d\n", soc->delay_timer);
     break;
 
     case OPCODE_GETT: // FX07
       soc->v[ins->X] = soc->delay_timer;
-//      printf("GETT hit: %d\n", soc->delay_timer);
     break;
 
     case OPCODE_SPRITE:

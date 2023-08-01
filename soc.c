@@ -39,12 +39,12 @@ void soc_update(struct typeSOC* soc) {
 
 void soc_press_key(struct typeSOC* soc, uint8_t pos) {
   soc->key[pos] = 1;
-  printf("pressed key %d\n", pos);
 }
+
 void soc_release_key(struct typeSOC* soc, uint8_t pos) {
   soc->key[pos] = 0;
-  printf("released  key %d\n", pos);
 }
+
 void dump_registers(struct typeSOC* soc, struct typeInstruction* ins, int debug) {
   if (debug) {
     printf("Count=%04d PC=%03x Opcode=%04x V[", soc->count, soc->pc, ins->fetch);

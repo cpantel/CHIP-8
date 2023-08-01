@@ -52,7 +52,6 @@ int main(int argc, char **argv){
                 quit = 1;
             } else if(event.type == SDL_KEYDOWN){
                 if (event.key.keysym.mod & KMOD_LSHIFT ) {		    
-		  printf("event.key.keysum.mod: %x\n", event.key.keysym.mod);
                   if(event.key.keysym.sym == SDLK_s) run = ! run;
                   if(event.key.keysym.sym == SDLK_n) soc_step(&soc,1);
                   if(event.key.keysym.sym == SDLK_g) { debug = ! debug;          run = 0; }
@@ -120,7 +119,7 @@ int main(int argc, char **argv){
 	if (show_time) printf("t=%f\n", cpu_time_used);
 
         SDL_Delay(frame_delay);
-	if (soc.count % ( steps_by_frame * frame_delay) == 0) printf("===== frame =====\n");
+	// if (soc.count % ( steps_by_frame * frame_delay) == 0) printf("===== frame =====\n");
     }
     if (halted) {
        printf("Halted execution\n");      
