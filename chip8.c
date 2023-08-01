@@ -64,40 +64,40 @@ int main(int argc, char **argv){
 		  if(event.key.keysym.sym == SDLK_h) { show_help();              run = 0; }
                   if(event.key.keysym.sym == SDLK_q) quit = 1;
 		} else {
-                  if(event.key.keysym.sym == SDLK_1) soc_press_key(&soc, 0);
-                  if(event.key.keysym.sym == SDLK_2) soc_press_key(&soc, 1);
-                  if(event.key.keysym.sym == SDLK_3) soc_press_key(&soc, 2);
-                  if(event.key.keysym.sym == SDLK_4) soc_press_key(&soc, 3);
+                  if(event.key.keysym.sym == SDLK_1) soc_press_key(&soc, 1);
+                  if(event.key.keysym.sym == SDLK_2) soc_press_key(&soc, 2);
+                  if(event.key.keysym.sym == SDLK_3) soc_press_key(&soc, 3);
+                  if(event.key.keysym.sym == SDLK_4) soc_press_key(&soc, 12);
                   if(event.key.keysym.sym == SDLK_q) soc_press_key(&soc, 4);
                   if(event.key.keysym.sym == SDLK_w) soc_press_key(&soc, 5);
                   if(event.key.keysym.sym == SDLK_e) soc_press_key(&soc, 6);
-                  if(event.key.keysym.sym == SDLK_r) soc_press_key(&soc, 7);
-                  if(event.key.keysym.sym == SDLK_a) soc_press_key(&soc, 8);
-                  if(event.key.keysym.sym == SDLK_s) soc_press_key(&soc, 9);
-                  if(event.key.keysym.sym == SDLK_d) soc_press_key(&soc, 10);
-                  if(event.key.keysym.sym == SDLK_f) soc_press_key(&soc, 11);
-                  if(event.key.keysym.sym == SDLK_z) soc_press_key(&soc, 12);
-                  if(event.key.keysym.sym == SDLK_x) soc_press_key(&soc, 13);
-                  if(event.key.keysym.sym == SDLK_c) soc_press_key(&soc, 14);
+                  if(event.key.keysym.sym == SDLK_r) soc_press_key(&soc, 13);
+                  if(event.key.keysym.sym == SDLK_a) soc_press_key(&soc, 7);
+                  if(event.key.keysym.sym == SDLK_s) soc_press_key(&soc, 8);
+                  if(event.key.keysym.sym == SDLK_d) soc_press_key(&soc, 9);
+                  if(event.key.keysym.sym == SDLK_f) soc_press_key(&soc, 14);
+                  if(event.key.keysym.sym == SDLK_z) soc_press_key(&soc, 10);
+                  if(event.key.keysym.sym == SDLK_x) soc_press_key(&soc, 0);
+                  if(event.key.keysym.sym == SDLK_c) soc_press_key(&soc, 11);
                   if(event.key.keysym.sym == SDLK_v) soc_press_key(&soc, 15);
 		}
             } else if(event.type == SDL_KEYUP){
                if (event.key.keysym.mod == KMOD_NONE ) {		    
-                 if(event.key.keysym.sym == SDLK_1) soc_release_key(&soc, 0);
-                 if(event.key.keysym.sym == SDLK_2) soc_release_key(&soc, 1);
-                 if(event.key.keysym.sym == SDLK_3) soc_release_key(&soc, 2);
-                 if(event.key.keysym.sym == SDLK_4) soc_release_key(&soc, 3);
+                 if(event.key.keysym.sym == SDLK_1) soc_release_key(&soc, 1);
+                 if(event.key.keysym.sym == SDLK_2) soc_release_key(&soc, 2);
+                 if(event.key.keysym.sym == SDLK_3) soc_release_key(&soc, 3);
+                 if(event.key.keysym.sym == SDLK_4) soc_release_key(&soc, 12);
                  if(event.key.keysym.sym == SDLK_q) soc_release_key(&soc, 4);
                  if(event.key.keysym.sym == SDLK_w) soc_release_key(&soc, 5);
                  if(event.key.keysym.sym == SDLK_e) soc_release_key(&soc, 6);
-                 if(event.key.keysym.sym == SDLK_r) soc_release_key(&soc, 7);
-                 if(event.key.keysym.sym == SDLK_a) soc_release_key(&soc, 8);
-                 if(event.key.keysym.sym == SDLK_s) soc_release_key(&soc, 9);
-                 if(event.key.keysym.sym == SDLK_d) soc_release_key(&soc, 10);
-                 if(event.key.keysym.sym == SDLK_f) soc_release_key(&soc, 11);
-                 if(event.key.keysym.sym == SDLK_z) soc_release_key(&soc, 12);
-                 if(event.key.keysym.sym == SDLK_x) soc_release_key(&soc, 13);
-                 if(event.key.keysym.sym == SDLK_c) soc_release_key(&soc, 14);
+                 if(event.key.keysym.sym == SDLK_r) soc_release_key(&soc, 13);
+                 if(event.key.keysym.sym == SDLK_a) soc_release_key(&soc, 7);
+                 if(event.key.keysym.sym == SDLK_s) soc_release_key(&soc, 8);
+                 if(event.key.keysym.sym == SDLK_d) soc_release_key(&soc, 9);
+                 if(event.key.keysym.sym == SDLK_f) soc_release_key(&soc, 14);
+                 if(event.key.keysym.sym == SDLK_z) soc_release_key(&soc, 10);
+                 if(event.key.keysym.sym == SDLK_x) soc_release_key(&soc, 0);
+                 if(event.key.keysym.sym == SDLK_c) soc_release_key(&soc, 11);
                  if(event.key.keysym.sym == SDLK_v) soc_release_key(&soc, 15);
                }
             }

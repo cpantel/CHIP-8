@@ -46,23 +46,23 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
       soc->v[ins->X]+= ins->NN;
     break;
 
-    case OPCODE_CP: // 0x8YX0
+    case OPCODE_CP: // 0x8XY0
       soc->v[ins->X] = soc->v[ins->Y];
     break;
 
-    case OPCODE_OR: // 0x8YX1
+    case OPCODE_OR: // 0x8XY1
       soc->v[ins->X] |= soc->v[ins->Y];
     break;
 
-    case OPCODE_AND: // 0x8YX2
+    case OPCODE_AND: // 0x8XY2
       soc->v[ins->X] &= soc->v[ins->Y];
     break;
 
-    case OPCODE_XOR: // 0x8YX3
+    case OPCODE_XOR: // 0x8XY3
       soc->v[ins->X] ^= soc->v[ins->Y];
     break;
 
-    case OPCODE_ADDC: // 0x8YX4
+    case OPCODE_ADDC: // 0x8XY4
      { 
           uint16_t result = soc->v[ins->X] + soc->v[ins->Y];
           soc->v[ins->X] = result;
@@ -70,7 +70,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
      }
     break;
 
-    case OPCODE_SUB: // 0x8YX5
+    case OPCODE_SUB: // 0x8XY5
       {
           uint16_t X = soc->v[ins->X];
           uint16_t Y = soc->v[ins->Y];
@@ -80,7 +80,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
       }
     break;
 
-    case OPCODE_SHR: // 0x8YX6
+    case OPCODE_SHR: // 0x8XY6
       {
           uint8_t carry = soc->v[ins->Y] & 0x1;
           soc->v[ins->X] = soc->v[ins->Y];
@@ -89,7 +89,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
       }	  
     break;
 
-    case OPCODE_SUBI: // 0x8YX7
+    case OPCODE_SUBI: // 0x8XY7
       {
           uint16_t X = soc->v[ins->X];
           uint16_t Y = soc->v[ins->Y];
@@ -99,7 +99,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
       }
     break;
 
-    case OPCODE_SHL: // 0x8YXE
+    case OPCODE_SHL: // 0x8XYE
       {
         uint8_t carry = ( soc->v[ins->X] ) >> 7;
 	soc->v[ins->X] = soc->v[ins->Y];
@@ -144,11 +144,11 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
     break;
 
     case OPCODE_SKP: // EX9E
-      if (soc->key[ins->key]) soc->pc+=2;
+      if (soc->key[soc->v[ins->key]]) soc->pc+=2;
     break;
 
     case OPCODE_SKNP: // EXA1
-      if ( ! soc->key[ins->key]) soc->pc+=2;
+      if ( ! soc->key[soc->v[ins->key]]) soc->pc+=2;
     break;
 
     case OPCODE_WKP: // 0xFX0A
