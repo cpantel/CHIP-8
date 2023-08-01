@@ -28,6 +28,9 @@ struct typeSOC {
 	uint8_t last_key;
 };
 
+void soc_set_pixel(struct typeSOC * soc, uint8_t x, uint8_t y, uint32_t value);
+uint32_t soc_get_pixel(struct typeSOC* soc, uint8_t x, uint8_t y);
+
 void soc_clear_screen(struct typeSOC* soc, uint32_t color);
 void soc_init(struct typeSOC* soc, char*);
 int soc_step(struct typeSOC* soc, int);

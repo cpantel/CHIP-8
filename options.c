@@ -22,7 +22,7 @@ void config_parse_args(int argc, char **argv, struct configType* config) {
   config->start_paused   = 0;
   config->max_step_count = INT_MAX;
   config->frame_delay    = 16;
-  config->steps_by_frame = 1;
+  config->steps_by_frame = 8;
   config->rom_path       = 0;
   config->dump_screen    = 0;
 
