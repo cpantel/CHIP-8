@@ -43,13 +43,17 @@ void test_RND(struct typeSOC* soc, struct typeInstruction* ins) {
 }
 
 void test_SKP(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->pc = 0x200;
-  soc->key[4]=0;
-  ins->fetch = 0xE493;
+  soc->pc     = 0x200;
+  soc->key[4] = 0;
+  soc->v[7]   = 4;
+
+  ins->fetch = 0xE79E;
   predecode(ins),
   api(soc, ins, OPCODE_SKP);
   assert_equal(0x200, soc->pc, "SKP: bad jump");
-  soc->key[4]=1;
+
+  soc->key[5]=1;
+  soc->v[7]=5;
   api(soc, ins, OPCODE_SKP);
   assert_equal(0x202, soc->pc, "SKP: missing jump");
 }
@@ -57,12 +61,16 @@ void test_SKP(struct typeSOC* soc, struct typeInstruction* ins) {
 
 void test_SKNP(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->pc = 0x200;
-  soc->key[4]=1;
-  ins->fetch = 0xE493;
+  soc->key[6]=1;
+  soc->v[4] = 6;
+
+  ins->fetch = 0xE4A1;
   predecode(ins),
   api(soc, ins, OPCODE_SKNP);
   assert_equal(0x200, soc->pc, "SKNP: bad jump");
+
   soc->key[4]=0;
+  soc->v[4] = 4;
   api(soc, ins, OPCODE_SKNP);
   assert_equal(0x202, soc->pc, "SKNP: missing jump");
 }
@@ -205,27 +213,32 @@ void test_SAVE(struct typeSOC* soc, struct typeInstruction* ins) {
 
 
 void test_SHL(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->v[3]=4;
-  ins->fetch = 0x8306;
+  soc->v[3]=0;
+  soc->v[0]=4;
+
+  ins->fetch = 0x830E;
   predecode(ins);
   api(soc, ins, OPCODE_SHL);
   assert_equal(8, soc->v[3], "SHL 1: bad shift");
   assert_equal(0, soc->v[0xf], "SHL 1: bad extra carry");
 
-  soc->v[3]=0xf0;
+  soc->v[3]=0x0;
+  soc->v[0]=0xf0;
   api(soc, ins, OPCODE_SHL);
   assert_equal(0xe0, soc->v[3], "SHL 2: bad shift");
   assert_equal(1, soc->v[0xf], "SHL 2: bad missing carry");
 }
 void test_SHR(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->v[3]=4;
+  soc->v[3]=6;
+  soc->v[4]=4;
   ins->fetch = 0x8346;
   predecode(ins);
   api(soc, ins, OPCODE_SHR);
   assert_equal(2, soc->v[3], "SHR 1: bad shift");
   assert_equal(0, soc->v[0xf], "SHR 1: bad extra carry");
 
-  soc->v[3]=5;
+  soc->v[3]=4;
+  soc->v[4]=5;
   api(soc, ins, OPCODE_SHR);
   assert_equal(2, soc->v[3], "SHR 2: bad shift");
   assert_equal(1, soc->v[0xf], "SHR 2: bad missing carry");
