@@ -307,34 +307,34 @@ void soc_init(struct typeSOC* soc, char* filename) {
   }
 }
 void print_line(char* start, char* center, char* end) {
-  printf("   %s%s", start, center);    
+  printf("        %s%s", start, center);    
   for (int x=1; x < SCREEN_WIDTH; ++x) {
-    printf("%s",center);
+    printf("%s%s",center,center);
   }      
-  printf("%s\n",end);
+  printf("%s%s\n",center,end);
 }
 
 void soc_dump_screen(struct typeSOC* soc) {
 
-  printf("    0");    
+  printf("          0");    
   for (int x=1; x < SCREEN_WIDTH; ++x) {
     if (x %10 == 0) {
-      printf("+");
+      printf(" +");
     } else {
-      printf("%d", x %10);
+      printf(" %d", x %10);
     }
   }      
   printf("\n");
   print_line("\u2554", "\u2550", "\u2557");  
  
   for (int y=0; y< SCREEN_HEIGHT; ++y) {
-    printf("%02d \u2551", y);      
+    printf("%4d %02d \u2551", y* 64, y);      
     for (int x=0; x < SCREEN_WIDTH; ++x) {
       if (soc_get_pixel(soc, x, y)) {
         // https://en.wikipedia.org/wiki/Box-drawing_character#Unicode
-        printf("\u2588");
+        printf("\u2588\u2588");
       } else {
-        printf(" ");
+        printf(" .");
       }
     }
     printf("\u2551\n");

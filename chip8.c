@@ -124,7 +124,7 @@ int main(int argc, char **argv){
     // if (soc.count % ( steps_by_frame * frame_delay) == 0) printf("===== frame =====\n");
   }
   if (halted) {
-    printf("Halted execution\n");      
+    printf("Detected jump to PC, execution halted\n");      
     SDL_Delay(3000);
   }
   if (dump_screen) soc_dump_screen(&soc);
