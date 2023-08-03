@@ -6,13 +6,13 @@
 #include "options.h"
 
 void show_help() {
-  printf("s: start/pause execution\n");
+  printf("r: start/pause execution\n");
   printf("n: execute next step\n");
   printf("d: turn on/off debug output\n");
   printf("t: turn on/off timing output\n");
-  printf("r: dump registers and pause\n");
+  printf("v: dump registers and pause\n");
   printf("m: dump memory and pause\n");
-  printf("v: dump screen and pause\n");
+  printf("s: dump screen and pause\n");
   printf("k: dump key and pause\n");
   printf("h: show this help \n");
   printf("q: exit program \n");
@@ -53,13 +53,13 @@ int main(int argc, char **argv){
         quit = 1;
       } else if(event.type == SDL_KEYDOWN){
         if (event.key.keysym.mod & KMOD_LSHIFT ) {            
-          if(event.key.keysym.sym == SDLK_s) run = ! run;
+          if(event.key.keysym.sym == SDLK_r) run = ! run;
           if(event.key.keysym.sym == SDLK_n) soc_step(&soc,1);
           if(event.key.keysym.sym == SDLK_d) { debug = ! debug;          run = 0; }
           if(event.key.keysym.sym == SDLK_t) { show_time = ! show_time;   run = 0; }
-          if(event.key.keysym.sym == SDLK_r) { soc_dump_registers(&soc); run = 0; }
+          if(event.key.keysym.sym == SDLK_v) { soc_dump_registers(&soc); run = 0; }
           if(event.key.keysym.sym == SDLK_m) { soc_dump_memory(&soc);    run = 0; }
-          if(event.key.keysym.sym == SDLK_v) { soc_dump_screen(&soc);    run = 0; }
+          if(event.key.keysym.sym == SDLK_s) { soc_dump_screen(&soc);    run = 0; }
           if(event.key.keysym.sym == SDLK_k) { soc_dump_key(&soc);       run = 0; }
           if(event.key.keysym.sym == SDLK_h) { show_help();              run = 0; }
           if(event.key.keysym.sym == SDLK_q) quit = 1;

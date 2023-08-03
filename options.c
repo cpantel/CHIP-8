@@ -9,7 +9,7 @@ void config_print_args(struct configType* config);
 void config_print_args(struct configType* config) {
   printf("Debug Mode    : %d\n", config->debug_mode);
   printf("Start Paused  : %d\n", config->start_paused);
-  printf("Max Step Count: %d\n", config->max_step_count);
+  printf("Max Step Count: %zu\n", config->max_step_count);
   printf("Frame Delay   : %d\n", config->frame_delay);
   printf("Steps by Frame: %d\n", config->steps_by_frame);
   printf("ROM path      : %s\n", config->rom_path);

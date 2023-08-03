@@ -281,7 +281,7 @@ void soc_init(struct typeSOC* soc, char* filename) {
    
    FILE *input = fopen(filename, "rb");
    size_t result = fread( (void *) &( soc->memory[0x200] ) , 1,  0xE00, input);
-   printf("Read %d bytes\n", result);
+   printf("Read %zu bytes\n", result);
    fclose(input);
 
    uint8_t font[80] = {
