@@ -10,6 +10,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
   switch(opcode) {
     case OPCODE_CLS: // 0x00E0
       soc_clear_screen(soc,0);
+      soc->redraw = 1;
     break;  
 
     case OPCODE_RET: // 0x00EE
@@ -102,9 +103,9 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
     case OPCODE_SHL: // 0x8XYE
       {
         uint8_t carry = ( soc->v[ins->Y] ) >> 7;
-    soc->v[ins->X] = soc->v[ins->Y];
+        soc->v[ins->X] = soc->v[ins->Y];
         soc->v[ins->X] = soc->v[ins->X] << 1;
-    soc->v[0xF] = carry;
+        soc->v[0xF] = carry;
       }
     break;
 
@@ -219,6 +220,7 @@ void api (struct typeSOC* soc, struct typeInstruction* ins, enum Opcode opcode) 
           }
         }
       }
+      soc->redraw = 1;
     break;
     case OPCODE_SETB:
     case OPCODE_SETI:

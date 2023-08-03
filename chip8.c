@@ -46,6 +46,7 @@ int main(int argc, char **argv){
   SDL_Texture *texture = SDL_CreateTexture(renderer,SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, SCREEN_WIDTH, SCREEN_HEIGHT);
 
   while (!quit && ! halted) {
+    soc.redraw = 0;
     start = clock();
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT) {
@@ -110,9 +111,11 @@ int main(int argc, char **argv){
     soc_update(&soc);        
        
     // Dibujar pantalla
-    SDL_UpdateTexture(texture, NULL, soc.screen, SCREEN_WIDTH * sizeof(Uint32));
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-    SDL_RenderPresent(renderer);
+    if (soc.redraw) {
+      SDL_UpdateTexture(texture, NULL, soc.screen, SCREEN_WIDTH * sizeof(Uint32));
+      SDL_RenderCopy(renderer, texture, NULL, NULL);
+      SDL_RenderPresent(renderer);
+    }
     // Esperar al próximo frame
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;

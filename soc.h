@@ -13,19 +13,20 @@ enum KB_state {
 };
 
 struct typeSOC {
-	uint16_t pc;
-	uint16_t i;
-	uint8_t v[16];
-	uint16_t key[16];
-	uint16_t stack[24];
-	uint8_t  memory[0x1000];
-	uint8_t  stack_pointer;
-        uint32_t screen[SCREEN_WIDTH * SCREEN_HEIGHT];
-	uint8_t delay_timer;
-	uint8_t sound_timer;
-	uint32_t count;
-	enum KB_state kb_state;
-	uint8_t last_key;
+  uint16_t pc;
+  uint16_t i;
+  uint8_t v[16];
+  uint16_t key[16];
+  uint16_t stack[24];
+  uint8_t  memory[0x1000];
+  uint8_t  stack_pointer;
+  uint32_t screen[SCREEN_WIDTH * SCREEN_HEIGHT];
+  uint8_t delay_timer;
+  uint8_t sound_timer;
+  uint32_t count;
+  enum KB_state kb_state;
+  uint8_t last_key;
+  int redraw;
 };
 
 void soc_set_pixel(struct typeSOC * soc, uint8_t x, uint8_t y, uint32_t value);
