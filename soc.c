@@ -60,8 +60,7 @@ int soc_step(struct typeSOC* soc, int debug) {
   struct typeInstruction ins;
   fetch(soc,&ins);
   dump_registers(soc, &ins, debug);
-  if (0 && ins.opcode == 1 && soc->pc == ins.NNN) {
-     printf("Halted execution\n");      
+  if (ins.opcode == 1 && soc->pc == ins.NNN) {
      return 1;
   }
 
