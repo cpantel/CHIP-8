@@ -8,7 +8,7 @@
 void show_help() {
   printf("s: start/pause execution\n");
   printf("n: execute next step\n");
-  printf("g: turn on/off debug output\n");
+  printf("d: turn on/off debug output\n");
   printf("t: turn on/off timing output\n");
   printf("r: dump registers and pause\n");
   printf("m: dump memory and pause\n");
@@ -54,7 +54,7 @@ int main(int argc, char **argv){
         if (event.key.keysym.mod & KMOD_LSHIFT ) {            
           if(event.key.keysym.sym == SDLK_s) run = ! run;
           if(event.key.keysym.sym == SDLK_n) soc_step(&soc,1);
-          if(event.key.keysym.sym == SDLK_g) { debug = ! debug;          run = 0; }
+          if(event.key.keysym.sym == SDLK_d) { debug = ! debug;          run = 0; }
           if(event.key.keysym.sym == SDLK_t) { show_time = ! show_time;   run = 0; }
           if(event.key.keysym.sym == SDLK_r) { soc_dump_registers(&soc); run = 0; }
           if(event.key.keysym.sym == SDLK_m) { soc_dump_memory(&soc);    run = 0; }
