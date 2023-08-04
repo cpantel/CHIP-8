@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "soc.h"
 #include "api.h"
 #include "instruction.h"
@@ -11,7 +12,7 @@ void assert_equal(uint32_t expected, uint32_t got, char * msg) {
     printf("\n%s, expected: %x got: %x\n", msg, expected, got);
   } else {
     printf(".");
-  }	  
+  }	
 }
 
 void assert_equal_memory(char* expected, char* got, char * msg) {
@@ -19,20 +20,8 @@ void assert_equal_memory(char* expected, char* got, char * msg) {
     printf("\n%s, expected: %s got: %s\n", msg, expected, got);
   } else {
     printf(".");
-  }    
+  }
 }
-
-
-
-
-/*void test_(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->pc = 0;
-  ins->fetch = 0x;
-  predecode(ins);
-  api(soc, ins, OPCODE_);
-  assert_equal(0, , " bad");
-}
-*/
 
 void test_RND(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0xCAAA;
@@ -58,7 +47,6 @@ void test_SKP(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0x202, soc->pc, "SKP: missing jump");
 }
 
-
 void test_SKNP(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->pc = 0x200;
   soc->key[6]=1;
@@ -75,15 +63,11 @@ void test_SKNP(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0x202, soc->pc, "SKNP: missing jump");
 }
 
-
-
 void test_soc_press_key(struct typeSOC* soc){
   soc->key[2] = 0;	
   soc_press_key(soc,2);
   assert_equal(1,soc->key[2], "soc_press_key: bad value");
 }
-
-
 
 void test_SETT_soc_update_GETT(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[0xa] = 0x18;
@@ -162,7 +146,7 @@ void test_BCD(struct typeSOC* soc, struct typeInstruction* ins) {
 }
 
 void test_LOAD(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->i        =3;  
+  soc->i        =3;
   soc->memory[3]=0;	
   soc->memory[4]=1;	
   soc->memory[5]=2;	
@@ -183,20 +167,20 @@ void test_LOAD(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(5, soc->v[5], "LOAD 5; bad value");
   assert_equal(6, soc->v[6], "LOAD 6; bad value");
   assert_equal(0xf, soc->v[7], "LOAD 6; bad guard");
-
 }
+
 void test_SAVE(struct typeSOC* soc, struct typeInstruction* ins) {
-  soc->i    = 6;  
+  soc->i    = 6;
   soc->v[0] = 0;
-  soc->v[1] = 1; 
-  soc->v[2] = 2; 
-  soc->v[3] = 3; 
-  soc->v[4] = 4; 
-  soc->v[5] = 5; 
-  soc->v[6] = 6; 
+  soc->v[1] = 1;
+  soc->v[2] = 2;
+  soc->v[3] = 3;
+  soc->v[4] = 4;
+  soc->v[5] = 5;
+  soc->v[6] = 6;
   soc->v[7] = 7;
   soc->memory[0xe] = 0xff;
-  ins->fetch = 0xf755; 
+  ins->fetch = 0xf755;
   predecode(ins);
   api(soc, ins, OPCODE_SAVE);
   assert_equal(0, soc->memory[6], "SAVE 0: bad value");
@@ -209,8 +193,6 @@ void test_SAVE(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(7, soc->memory[0xd], "SAVE 7: bad value");
   assert_equal(0xff, soc->memory[0xe], "SAVE: bad guard");
 }
-
-
 
 void test_SHL(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[3]=0;
@@ -228,6 +210,7 @@ void test_SHL(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0xe0, soc->v[3], "SHL 2: bad shift");
   assert_equal(1, soc->v[0xf], "SHL 2: bad missing carry");
 }
+
 void test_SHR(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[3]=6;
   soc->v[4]=4;
@@ -267,8 +250,6 @@ void test_SUBI(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0x00, soc->v[0xf], "SUBI 2: bad missing carry");
 }
 
-
-
 void test_SUB(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[3] = 0xff;
   soc->v[4] = 0x01;
@@ -285,7 +266,6 @@ void test_SUB(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0xff, soc->v[3], "SUB 2: bad result");
   assert_equal(0x00, soc->v[0xf], "SUB 2: bad missing carry");
 }
-
 
 void test_ADDC(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[3] = 0xff;
@@ -328,8 +308,6 @@ void test_XOR(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0xd5, soc->v[8], "XOR: bad result");
 }
 
-
-
 void test_CP(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->v[7] = 0x1;
   soc->v[5] = 0x2a;
@@ -339,14 +317,12 @@ void test_CP(struct typeSOC* soc, struct typeInstruction* ins) {
   assert_equal(0x2a, soc->v[7], "CP: bad ");
 }
 
-
-
 void test_CALL_RET(struct typeSOC* soc, struct typeInstruction* ins) {
   soc->pc    =  0x2a2;
   ins->fetch = 0x2202;
   soc->stack_pointer = 0;
   soc->stack[soc->stack_pointer] = 0;
- 
+
   predecode(ins);
   api(soc, ins, OPCODE_CALL);
   ins->fetch = 0x00EE;
@@ -360,7 +336,7 @@ void test_CALL(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0x2202;
   soc->stack_pointer = 0;
   soc->stack[soc->stack_pointer] = 0;
- 
+
   predecode(ins);
   api(soc, ins, OPCODE_CALL);
   assert_equal(0x202, soc->pc , "CALL: bad pc");
@@ -476,21 +452,21 @@ void test_LDI(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0xA461;
   predecode(ins);
   api(soc,ins,OPCODE_LDI);
-  if (soc->i != 0x461) printf("LDI: failed to load index %X\n", soc->i);
+  assert_equal(0x461, soc->i, "LDI: failed to load index");
 }
 
 void test_LD(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0x6832;
   predecode(ins);
   api(soc,ins,OPCODE_LD);
-  if ( soc->v[8] != 0x32) printf("LD: failed register load: %X\n", soc->v[8]);
+  assert_equal(0x32, soc->v[8],"LD: failed register load");
 }
 
 void test_JMP(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0x1208;
   predecode(ins);
   api(soc,ins,OPCODE_JMP);
-  if (soc->pc != 0x208) printf("JMP: failed pc update %X\n", soc->pc);  
+  assert_equal(0x208, soc->pc, "JMP: failed pc update");
 }
 
 void test_JMPO(struct typeSOC* soc, struct typeInstruction* ins) {
@@ -499,9 +475,8 @@ void test_JMPO(struct typeSOC* soc, struct typeInstruction* ins) {
   ins->fetch = 0xA002;
   predecode(ins);
   api(soc,ins,OPCODE_JMPO);
-  assert_equal(0x14, soc->pc, "JMPO: failed pc update");  
+  assert_equal(0x14, soc->pc, "JMPO: failed pc update");
 }
-
 
 int main(int argc, char **args){
     struct typeSOC soc;
@@ -537,7 +512,5 @@ int main(int argc, char **args){
     test_RND(&soc,&ins);
     test_soc_update(&soc);
     test_soc_press_key(&soc);
-//    test_(&soc,&ins);
-//
     printf("!\n");
 }
